@@ -1,11 +1,12 @@
-import { Component, createSignal, Index, startTransition } from 'solid-js';
-import { Item } from './components/Item';
-import { SearchBox } from './components/SearchBox';
-import { itemMap } from './data/items';
+import { Component, createSignal, Index, startTransition } from "solid-js";
+import classes from "./App.module.css";
+import { Item } from "./components/Item";
+import { SearchBox } from "./components/SearchBox";
+import { itemMap } from "./data/items";
 
 const App: Component = () => {
-  const [input, setInput] = createSignal('');
-  const [searchQuery, setSearchQuery] = createSignal('');
+  const [input, setInput] = createSignal("");
+  const [searchQuery, setSearchQuery] = createSignal("");
 
   const onChange = (input: string) => {
     setInput(input);
@@ -16,21 +17,21 @@ const App: Component = () => {
 
   return (
     <>
-      <div>
+      <div class={classes.pokemonList}>
         <Index each={Array.from(itemMap.keys())}>
           {(id) => <Item id={id()} searchQuery={searchQuery()} />}
         </Index>
       </div>
-      <footer>
+      <footer class={classes.footer}>
         <p>
-          Data is obtained from{' '}
+          Data is obtained from{" "}
           <a href="https://pokeapi.co/" rel="external">
             PokéAPI
           </a>
           .
         </p>
       </footer>
-      <div>
+      <div class={classes.searchBox}>
         <SearchBox input={input()} onChange={onChange} />
       </div>
     </>
